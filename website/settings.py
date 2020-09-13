@@ -1,3 +1,5 @@
+import django-heroku
+
 """
 Django settings for website project.
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'nd(+9&!f756z)m&h-59xn3y_-ynn*gtal(#5ulr)w2z8y(@)6f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://website-1-36.herokuapp.com/"]
 
 
 # Application definition
@@ -118,3 +120,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+django_heroku.settings(locals())
