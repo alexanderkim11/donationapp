@@ -4,3 +4,6 @@ from django.template import loader
 # Create your views here.
 def index(request):
     return render(request, "donationapp/index.html")
+
+def account(request):
+    return render(request, "donationapp/account.html")
