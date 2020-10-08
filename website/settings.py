@@ -1,4 +1,5 @@
-import django_heroku
+#import django_heroku
+
 
 """
 Django settings for website project.
@@ -27,7 +28,9 @@ SECRET_KEY = 'nd(+9&!f756z)m&h-59xn3y_-ynn*gtal(#5ulr)w2z8y(@)6f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://website-1-36.herokuapp.com/"]
+ALLOWED_HOSTS = ["https://website-1-36.herokuapp.com/",
+"localhost"
+]
 
 
 # Application definition
@@ -150,4 +153,17 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
+# Activate Django-Heroku.
+
+try:
+
+    # Configure Django App for Heroku.
+
+    import django_heroku
+
+    django_heroku.settings(locals())
+
+except ImportError:
+
+    found = False
