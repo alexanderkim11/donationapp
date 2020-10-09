@@ -1,14 +1,11 @@
+{% extends 'donationapp/base.html' %}
 {% load socialaccount %}
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>My Account</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  </head>
-  <body>
-    <br>
+{% block title %}
+<title>My Account</title>
+{% endblock  %}
+
+{% block content %}
     <div class="container">
       <div class="jumbotron">
         <div class="media">
@@ -21,5 +18,4 @@
         </div>
       </div>
     </div>
-  </body>
-</html>
+{% endblock %}

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 # Create your views here.
 def index(request):
-    return render(request, "donationapp/index.html")
+    return render(request, "donationapp/index.html",{'nbar': 'home'})
 
 def account(request):
-    return render(request, "donationapp/account.html")
+    return render(request, "donationapp/account.html",{'nbar': 'account'})
