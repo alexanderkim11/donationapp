@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import os
+=======
+#import django_heroku
+
+>>>>>>> master
 
 """
 Django settings for website project.
@@ -29,7 +34,9 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://website-1-36.herokuapp.com/"]
+ALLOWED_HOSTS = ["https://website-1-36.herokuapp.com/",
+"localhost"
+]
 
 
 # Application definition
@@ -156,6 +163,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+<<<<<<< HEAD
 try:
     if '/app' in os.environ['HOME']:
         import django_heroku
@@ -172,3 +180,19 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'website/static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
+=======
+#django_heroku.settings(locals())
+# Activate Django-Heroku.
+
+try:
+
+    # Configure Django App for Heroku.
+
+    import django_heroku
+
+    django_heroku.settings(locals())
+
+except ImportError:
+
+    found = False
+>>>>>>> master
