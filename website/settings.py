@@ -163,6 +163,12 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 
+try:
+    if '/app' in os.environ['HOME']:
+        import django_heroku
+        django_heroku.settings(locals())
+except:
+    found = false
 
 STATIC_URL = '/static/'
 #location where django collect all static files
@@ -176,15 +182,3 @@ MEDIA_URL = '/media/'
 
 #django_heroku.settings(locals())
 # Activate Django-Heroku.
-
-try:
-
-    # Configure Django App for Heroku.
-
-    import django_heroku
-
-    django_heroku.settings(locals())
-
-except ImportError:
-
-    found = False
