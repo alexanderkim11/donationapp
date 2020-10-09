@@ -2,3 +2,4 @@ gunicorn
 django-heroku
 Django
 django-allauth
+dj-database-url
