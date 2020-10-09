@@ -1,9 +1,8 @@
-<<<<<<< HEAD
+
 import os
-=======
+
 #import django_heroku
 
->>>>>>> master
 
 """
 Django settings for website project.
@@ -163,13 +162,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-<<<<<<< HEAD
-try:
-    if '/app' in os.environ['HOME']:
-        import django_heroku
-        django_heroku.settings(locals())
-except:
-    found = false
+
 
 STATIC_URL = '/static/'
 #location where django collect all static files
@@ -180,7 +173,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'website/static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
-=======
+
 #django_heroku.settings(locals())
 # Activate Django-Heroku.
 
@@ -195,4 +188,3 @@ try:
 except ImportError:
 
     found = False
->>>>>>> master
