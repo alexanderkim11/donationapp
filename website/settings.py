@@ -24,8 +24,8 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, "templates/")
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'nd(+9&!f756z)m&h-59xn3y_-ynn*gtal(#5ulr)w2z8y(@)6f'
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'nd(+9&!f756z)m&h-59xn3y_-ynn*gtal(#5ulr)w2z8y(@)6f'
+#SECRET_KEY = os.environ.get('SECRET_KEY')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'whitenoise.runserver_nostatic',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'website.urls'
@@ -92,8 +92,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'donationapp',
+        'USER': 'donationappuser',
+        'PASSWORD': 'CS3240!!',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
