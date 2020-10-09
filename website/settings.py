@@ -1,5 +1,5 @@
-import django_heroku
-import dj_database_url
+import os
+
 """
 Django settings for website project.
 
@@ -12,10 +12,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
-if '/app' in os.environ['HOME']:
-    import django_heroku
-    django_heroku.settings(locals())
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates/")
@@ -92,20 +88,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        # 'NAME': 'donationapp',
-        # 'USER': 'donationappuser',
-        # 'PASSWORD': 'CS3240!!',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '5432',
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -169,6 +156,13 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+try:
+    if '/app' in os.environ['HOME']:
+        import django_heroku
+        django_heroku.settings(locals())
+except:
+    found = false
+
 STATIC_URL = '/static/'
 #location where django collect all static files
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
@@ -178,5 +172,3 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'website/static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
-
-django_heroku.settings(locals())
