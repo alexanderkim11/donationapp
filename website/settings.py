@@ -34,7 +34,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEBUG = True
 
 ALLOWED_HOSTS = ["https://website-1-36.herokuapp.com/",
-"localhost"
+"localhost",
 ]
 
 
