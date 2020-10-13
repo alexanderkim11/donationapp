@@ -168,7 +168,7 @@ try:
         import django_heroku
         django_heroku.settings(locals())
 except:
-    found = false
+    found = False
 
 STATIC_URL = '/static/'
 #location where django collect all static files
