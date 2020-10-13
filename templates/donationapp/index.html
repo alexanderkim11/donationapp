@@ -11,7 +11,7 @@
       <div class="container-fluid bg-1 text-center">
         <!--Once the user logs in-->
         <h1>Welcome, {{ user.username }} !</h1>
-        <a href="https://website-1-36.herokuapp.com/accounts/google/login/">Login to Different Account</a>
+        <a href="{% provider_login_url "google" %}?next={{ request.path }}">Login to Different Account</a>
       </div>
       <div class="container-fluid bg-2 text-center">
         <h3>So far, you have donated ___.</h3>
