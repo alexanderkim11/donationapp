@@ -5,5 +5,6 @@ app_name="donationapp"
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('account/', views.account, name="account")
+    path('account/', views.account, name="account"),
+    path('causes/', views.causes, name="causes")
 ]

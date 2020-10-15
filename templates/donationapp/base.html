@@ -24,6 +24,10 @@
         background-color: #b7ea7b; /* Light green */
         color: #555555;
       }
+      body {
+        background-color: #b7ea7b; /* Light green */
+        color: #555555;
+      }
 
       .container-fluid {
           padding-top: 100px;
@@ -59,6 +63,12 @@
         border: 2px solid #73AD21;
         background-color: #FEFEBE;
       }
+      .jumbotron {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background-color: #FFFFDE;
+     }
+}
 
     </style>
 
@@ -73,8 +83,8 @@
         <li class="nav-item {% if nbar == 'account' %}active{% endif %}">
           <a class="nav-link" href="{% url 'donationapp:account' %}">User Information</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">View Causes</a>
+        <li class="nav-item {% if nbar == 'causes' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'donationapp:causes' %}">View Causes</a>
         </li>
       </ul>
     </nav>

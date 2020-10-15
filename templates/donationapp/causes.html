@@ -1,0 +1,37 @@
+{% extends 'donationapp/base.html' %}
+{% load socialaccount %}
+
+
+{% block title %}
+<title>View Causes</title>
+{% endblock  %}
+
+{% block content %}
+
+<!{% if latest_cause_list %}
+    <ul>
+    </br>
+
+    {% for cause in latest_cause_list %}
+    </ul>
+        <div class="container">
+            <div class="jumbotron">
+                <div class="media">
+                    <div class="media-body">
+                        <div class="p-0" >
+
+                        <h3>{{ cause.name }}</h3>
+                        <h5>{{cause.description}}</h5>
+                        <b> Total Money: </b> {{cause.total_money}} </br><b> Goal: </b> {{cause.goal}}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No causes are available.</p>
+{% endif %}
+{% endblock %}
