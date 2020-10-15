@@ -8,17 +8,53 @@
     <!--Containers revealing user information: name, amount donated, cause donated to-->
     <!--Once the user logs in-->
     {% if user.is_authenticated %}
+      <!--Welcome section-->
       <div class="container-fluid bg-1 text-center">
-        <!--Once the user logs in-->
         <h1>Welcome, {{ user.username }} !</h1>
         <a href="{% provider_login_url "google" %}?next={{ request.path }}">Login to Different Account</a>
       </div>
+
+      <!--Summary of donation and cause-->
       <div class="container-fluid bg-2 text-center">
-        <h3>So far, you have donated ___.</h3>
+        <h3>So far, you have donated ___ to ___ .</h3>
       </div>
+
+      <!--Input form to enter donation amount-->
       <div class="container-fluid bg-3 text-center">
-        <h3>You currently donating to ____.</h3>
+        <h3>Plant your seeds of change here.</h3>
+        <div id="donation_input_container">
+          <div class="container-fluid-sub bg-4 text-center">
+            <!--Container for input options-->
+            <div id="donation_input_sub_box">
+              
+              <!--Donation amount form-->
+              <div class="form-group">
+                <label for="donation_amount">Amount:</label>
+                <input type="text" class="form-control" id="donation_amount">
+              </div>
+              
+              <!--Form to select cause, currently hardcoded-->
+              <div class="form-group col-xs-2">
+                <label for="sel1">Select a cause:</label>
+                <select class="form-control" id="sel1">
+                  <option>Cause 1</option>
+                  <option>Cause 2</option>
+                  <option>Cause 3</option>
+                  <option>Cause 4</option>
+                </select>
+              </div>
+
+              <!--Submit button that sends entry to database-->
+              <div class="form-group">
+                <input type="submit">
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
+      
+    <!--If user has not logged into account-->
     {% else %}
       <div class="container-fluid-main bg-1 text-center">
         <h1>Welcome to Pocket Pal.</h1>
