@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import Causes
+from .models import Cause, Transaction
 # Register your models here.
-admin.site.register(Causes)
+admin.site.register(Cause)
+admin.site.register(Transaction)
