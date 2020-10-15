@@ -1,8 +1,7 @@
 from django.test import TestCase
 from django.http import HttpRequest
 from django.urls import resolve
-from .views import index
-from .views import account
+from .views import index, account, causes
 from django.contrib.auth.models import User
 from django.test import Client
 from .models import Cause, Transaction
@@ -55,6 +54,13 @@ class AccountPageTest(TestCase):
         response = account(request)
         html = response.content.decode('utf8')
         self.assertIn('<title>My Account</title>', html)
+
+class CausesPageTest(TestCase):
+    def test_home_page_returns_correct_html(self):
+        request = HttpRequest()
+        response = causes(request)
+        html = response.content.decode('utf8')
+        self.assertIn('<title>View Causes</title>', html)
 
 class CauseModelTests(TestCase):
     def test_negative_total(self):
