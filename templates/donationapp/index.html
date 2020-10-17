@@ -37,10 +37,13 @@
               <div class="form-group col-xs-2">
                 <label for="sel1">Select a cause:</label>
                 <select class="form-control" id="sel1">
-                  <option>Cause 1</option>
-                  <option>Cause 2</option>
-                  <option>Cause 3</option>
-                  <option>Cause 4</option>
+                  {% if latest_cause_list %}
+                    {% for cause in latest_cause_list %}
+                      <option>{{ cause.name }}</option>
+                    {% endfor %}
+                  {% else %} 
+                    <option>No causes are available.</option>
+                  {% endif %} 
                 </select>
               </div>
 
