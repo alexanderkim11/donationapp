@@ -25,41 +25,14 @@
         <div id="donation_input_container">
           <div class="container-fluid-sub bg-4 text-center">
 
-            <!--Input Form-->
-            <form action = "" method = "post"> 
-              {% csrf_token %} 
-              {{form.as_p }} 
-              <input type="submit" value="OK">
-          </form> 
-
             <!--Container for input options-->
             <div id="donation_input_sub_box">
-              
-              <!--Donation amount form-->
-              <div class="form-group">
-                <label for="donation_amount">Amount:</label>
-                <input type="text" class="form-control" id="donation_amount">
-              </div>
-              
-              <!--Form to select cause, currently hardcoded-->
-              <div class="form-group col-xs-2">
-                <label for="sel1">Select a cause:</label>
-                <select class="form-control" id="sel1">
-                  {% if latest_cause_list %}
-                    {% for cause in latest_cause_list %}
-                      <option>{{ cause.name }}</option>
-                    {% endfor %}
-                  {% else %} 
-                    <option>No causes are available.</option>
-                  {% endif %} 
-                </select>
-              </div>
-
-              <!--Submit button that sends entry to database-->
-              <div class="form-group">
-                <input type="submit">
-              </div>
-
+              <!--Input Form-->
+              <form action = "" method = "post"> 
+                {% csrf_token %} 
+                {{form.as_p }} 
+                <input type="submit" value="OK">
+              </form> 
             </div>
           </div>
         </div>
