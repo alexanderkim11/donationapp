@@ -24,6 +24,14 @@
         <h3>Plant your seeds of change here.</h3>
         <div id="donation_input_container">
           <div class="container-fluid-sub bg-4 text-center">
+
+            <!--Input Form-->
+            <form action = "" method = "post"> 
+              {% csrf_token %} 
+              {{form.as_p }} 
+              <input type="submit" value="OK">
+          </form> 
+
             <!--Container for input options-->
             <div id="donation_input_sub_box">
               
