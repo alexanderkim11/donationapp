@@ -15,8 +15,8 @@ class Transaction(models.Model):
     cause = models.ForeignKey(Cause, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=8, decimal_places=2, validators=[MinValueValidator(0.01)])
-    #date = models.DateTimeField('date published')
+    date = models.DateTimeField('date published', null=True)
 
     def __str__(self):
-        #return "Cause: " + str(self.cause.name) + ", User: " + str(self.user.first_name) + ", Date: " + str(self.date)
-        return "Cause: " + str(self.cause.name) + ", User: " + str(self.user.first_name)
+        return "Cause: " + str(self.cause.name) + ", User: " + str(self.user.first_name) + ", Date: " + str(self.date)
+        #return "Cause: " + str(self.cause.name) + ", User: " + str(self.user.first_name)
