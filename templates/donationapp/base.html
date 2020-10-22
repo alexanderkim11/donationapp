@@ -86,6 +86,9 @@
         <li class="nav-item {% if nbar == 'causes' %}active{% endif %}">
           <a class="nav-link" href="{% url 'donationapp:causes' %}">View Causes</a>
         </li>
+        <li class="nav-item {% if nbar == 'volunteer' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'donationapp:volunteering' %}">View Volunteer Opportunities</a>
+        </li>
       </ul>
     </nav>
         {% block content %}

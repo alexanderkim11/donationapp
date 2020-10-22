@@ -20,3 +20,12 @@ class Transaction(models.Model):
     def __str__(self):
         return "Cause: " + str(self.cause.name) + ", User: " + str(self.user.first_name) + ", Date: " + str(self.date)
         #return "Cause: " + str(self.cause.name) + ", User: " + str(self.user.first_name)
+
+class Volunteer_Opportunity(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=512)
+    total_people = models.IntegerField(validators=[MinValueValidator(0)])
+    people_needed = models.IntegerField( validators=[MinValueValidator(1)])
+
+    def __str__(self):
+        return self.name
