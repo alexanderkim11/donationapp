@@ -1,0 +1,40 @@
+{% extends 'donationapp/base.html' %}
+{% load socialaccount %}
+
+
+{% block title %}
+<title>View Volunteer Opportunities</title>
+{% endblock  %}
+
+{% block content %}
+
+<!{% if latest_volunteer_list %}
+    <ul>
+    </br>Want to create your own volunteer opportunity? Click <a href="{% url 'donationapp:create' %}">here</a>
+
+    {% for volunteer in latest_volunteer_list %}
+    </ul>
+        <div class="container">
+            <div class="jumbotron">
+                <div class="media">
+                    <div class="media-body">
+                        <div class="p-0" >
+
+                        <h3>{{ volunteer.name }}</h3>
+                        <h5>{{volunteer.description}}</h5>
+                        <b> Total People: </b> {{volunteer.total_people}} </br><b> People Needed: </b> {{volunteer.people_needed}}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </ul>
+{% else %}
+    </br></br></br></br>
+    <div class="vertical-center">
+        <p style="text-align:center;">No Volunteer Opportunities available at this time.</p>
+    </div>
+{% endif %}
+{% endblock %}
