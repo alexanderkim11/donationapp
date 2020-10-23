@@ -11,7 +11,7 @@
       <!--Welcome section-->
       <div class="container-fluid bg-1 text-center">
         <h1>Welcome, {{ user.username }} !</h1>
-        <a href="{% provider_login_url "google" %}?next={{ request.path }}">Login to Different Account</a>
+        <a href="{% provider_login_url 'google' %}?next={{ request.path }}">Login to Different Account</a>
       </div>
 
       <!--Summary of donation and cause-->

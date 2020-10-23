@@ -1,10 +1,10 @@
 from django.test import TestCase
 from django.http import HttpRequest
 from django.urls import resolve
-from .views import index, account, causes
+from .views import index, account, causes, volunteer_opportunities
 from django.contrib.auth.models import User
 from django.test import Client
-from .models import Cause, Transaction
+from .models import Cause, Transaction, Volunteer_Opportunity
 from django.utils import timezone
 
 # Create your tests here.
@@ -62,6 +62,13 @@ class CausesPageTest(TestCase):
         html = response.content.decode('utf8')
         self.assertIn('<title>View Causes</title>', html)
 
+class VolunteeringPageTest(TestCase):
+    def test_home_page_returns_correct_html(self):
+        request = HttpRequest()
+        response = volunteer_opportunities(request)
+        html = response.content.decode('utf8')
+        self.assertIn('<title>View Volunteer Opportunities</title>', html)
+
 class CauseModelTests(TestCase):
     def test_negative_total(self):
         cause = Cause(name="test", description="testing causes", total_money=-100.00, goal=100)
@@ -79,3 +86,12 @@ class TransactionModelTests(TestCase):
         cause = Cause(name="test", description="testing causes", total_money=-100.00, goal=100)
         transaction = Transaction(cause=cause, user=user, amount=-100.00, date=timezone.now())
         self.assertTrue(transaction, False)
+
+class VolunteerOpportunityModelTests(TestCase):
+    def test_negative_total(self):
+        cause = Volunteer_Opportunity(name="test", description="testing volunteer opportunities", total_people=-6, people_needed=6)
+        self.assertTrue(cause, False)
+
+    def test_negative_goal(self):
+        cause = Volunteer_Opportunity(name="test", description="testing volunteer opportunities", total_people=6, people_needed=-6)
+        self.assertTrue(cause, False)
