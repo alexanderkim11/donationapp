@@ -32,8 +32,9 @@
                         <!-- jQuery Script to dynamically change progress bar-->
                         <script>
                             var i = 0;
+                            var val = {{cause.total_money}}
                             function makeProgress(){
-                                if(i < 100){
+                                if(i < val){
                                     i = i + 1;
                                     $(".progress-bar").css("width", i + "%").text(i + " %");
                                 }
