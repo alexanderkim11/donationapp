@@ -24,6 +24,11 @@ def account(request):
 
 def causes(request):
     latest_cause_list = Cause.objects.all()
+    all_transactions = Transaction.objects.all()
+    for cause in latest_cause_list:
+        for transaction in all_transactions:
+            if str(transaction.cause) == str(cause.name):
+                cause.total_money = cause.total_money + transaction.amount
     context = {'latest_cause_list': latest_cause_list,'nbar': 'causes'}
     return render(request, 'donationapp/causes.html',context)
 
