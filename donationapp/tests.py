@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponseRedirect
 from django.urls import resolve
 from .views import index, account, causes, volunteer_opportunities
 from django.contrib.auth.models import User
