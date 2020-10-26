@@ -36,9 +36,11 @@ def causes(request):
 
     # sum across all transactions to add total amount raised for cause
     for cause in latest_cause_list:
+        total = 0
         for transaction in all_transactions:
             if str(transaction.cause) == str(cause.name):
-                cause.total_money = cause.total_money + transaction.amount
+                total = total + transaction.amount
+        cause.total_money = total
         cause.save()
     context = {'latest_cause_list': latest_cause_list,'nbar': 'causes'}
     return render(request, 'donationapp/causes.html',context)
