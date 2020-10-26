@@ -33,8 +33,10 @@
                         <script>
                             var i = 0;
                             var val = {{cause.total_money}}
+                            var goal = {{cause.goal}}
+                            var percentage = (val / goal) * 100
                             function makeProgress(){
-                                if(i < val){
+                                if(i < percentage){
                                     i = i + 1;
                                     $(".progress-bar").css("width", i + "%").text(i + " %");
                                 }
