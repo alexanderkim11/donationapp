@@ -15,8 +15,14 @@ def index(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('donationapp:checkout', kwargs={'pk':form.cleaned_data['amount']}))
+        
+    # calculate total amount raised by the current user
+    all_transactions = Transaction.objects.filter(user=request.user)
+    total_raised = 0
+    for transaction in all_transactions:
+        total_raised = total_raised + transaction.amount
 
-    context = {'form': form,'nbar': 'home'}
+    context = {'form': form,'nbar': 'home', 'total_raised': total_raised}
     return render(request, "donationapp/index.html", context)
 
 def account(request):
@@ -25,10 +31,13 @@ def account(request):
 def causes(request):
     latest_cause_list = Cause.objects.all()
     all_transactions = Transaction.objects.all()
+
+    # sum across all transactions to add total amount raised for cause
     for cause in latest_cause_list:
         for transaction in all_transactions:
             if str(transaction.cause) == str(cause.name):
                 cause.total_money = cause.total_money + transaction.amount
+        cause.save()
     context = {'latest_cause_list': latest_cause_list,'nbar': 'causes'}
     return render(request, 'donationapp/causes.html',context)
 
