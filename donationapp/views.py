@@ -5,6 +5,7 @@ from .models import Cause, Transaction, Volunteer_Opportunity
 from .forms import TransactionForm
 from django.urls import reverse
 from .forms import TransactionForm, VolunteerForm
+from django.conf import settings
 
 # Create your views here.
 def index(request):
