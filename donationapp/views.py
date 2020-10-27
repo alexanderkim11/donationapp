@@ -12,14 +12,15 @@ from importlib import import_module
 def index(request):
     form = TransactionForm()
 
-    if request.method == 'POST':
+    # if request.method == 'GET': # accessing website
+    if request.method == 'POST': # submitting to form
         form = TransactionForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('donationapp:checkout', kwargs={'pk':form.cleaned_data['amount']}))
         
     # calculate total amount raised by the current user
-    if request.user is not None:
+    if request.method == 'GET':
         all_transactions = Transaction.objects.filter(user = request.user)
         total_raised = 0
         for transaction in all_transactions:

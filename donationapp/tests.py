@@ -45,9 +45,6 @@ class Login_Test_Case_Capitalization(TestCase):
 #These just tell whether loads to the right page
 class HomePageTest(TestCase):
     def test_home_page_returns_correct_html(self):
-        user = User.objects.create(username='donationAppCS3240@gmail.com')
-        user.set_password('CS3240!!')
-        user.save()
         request = HttpRequest()
         response = index(request)
         html = response.content.decode('utf8')
