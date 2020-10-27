@@ -19,10 +19,11 @@ def index(request):
             return HttpResponseRedirect(reverse('donationapp:checkout', kwargs={'pk':form.cleaned_data['amount']}))
         
     # calculate total amount raised by the current user
-    all_transactions = Transaction.objects.filter(user = request.user)
-    total_raised = 0
-    for transaction in all_transactions:
-        total_raised = total_raised + transaction.amount
+    if request.user is not None:
+        all_transactions = Transaction.objects.filter(user = request.user)
+        total_raised = 0
+        for transaction in all_transactions:
+            total_raised = total_raised + transaction.amount
 
     context = {'form': form,'nbar': 'home', 'total_raised': total_raised}
     return render(request, "donationapp/index.html", context)
