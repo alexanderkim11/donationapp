@@ -20,9 +20,9 @@ def index(request):
             return HttpResponseRedirect(reverse('donationapp:checkout', kwargs={'pk':form.cleaned_data['amount']}))
         
     # calculate total amount raised by the current user
+    total_raised = 0
     if request.method == 'GET':
         all_transactions = Transaction.objects.filter(user = request.user)
-        total_raised = 0
         for transaction in all_transactions:
             total_raised = total_raised + transaction.amount
 
