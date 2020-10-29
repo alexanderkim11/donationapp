@@ -5,18 +5,28 @@ from .models import Cause, Transaction, Volunteer_Opportunity
 from .forms import TransactionForm
 from django.urls import reverse
 from .forms import TransactionForm, VolunteerForm
+from django.conf import settings
+from importlib import import_module
 
 # Create your views here.
 def index(request):
     form = TransactionForm()
 
-    if request.method == 'POST':
+    # if request.method == 'GET': # accessing website
+    if request.method == 'POST': # submitting to form
         form = TransactionForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('donationapp:checkout', kwargs={'pk':form.cleaned_data['amount']}))
+        
+    # calculate total amount raised by the current user
+    total_raised = 0
+    if request.method == 'GET':
+        all_transactions = Transaction.objects.filter(user = request.user)
+        for transaction in all_transactions:
+            total_raised = total_raised + transaction.amount
 
-    context = {'form': form,'nbar': 'home'}
+    context = {'form': form,'nbar': 'home', 'total_raised': total_raised}
     return render(request, "donationapp/index.html", context)
 
 def account(request):
@@ -24,6 +34,16 @@ def account(request):
 
 def causes(request):
     latest_cause_list = Cause.objects.all()
+    all_transactions = Transaction.objects.all()
+
+    # sum across all transactions to add total amount raised for cause
+    for cause in latest_cause_list:
+        total = 0
+        for transaction in all_transactions:
+            if str(transaction.cause) == str(cause.name):
+                total = total + transaction.amount
+        cause.total_money = total
+        cause.save()
     context = {'latest_cause_list': latest_cause_list,'nbar': 'causes'}
     return render(request, 'donationapp/causes.html',context)
 
