@@ -26,25 +26,15 @@
                         </div>
                         <!--Progress bar-->
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped" style="min-width: 20px;"></div>
+                            <div class="progress-bar progress-bar-striped" id = "{{cause.name}}"></div>
+                            <!--change progress bar-->
+                            <script>
+                                var x = document.getElementById("{{cause.name}}");
+                                var val = ({{cause.total_money}} / {{cause.goal}} * 100);
+                                x.style.width = val + "%";
+                                x.innerHTML += val + "%";
+                            </script>
                         </div>
-                    
-                        <!-- jQuery Script to dynamically change progress bar-->
-                        <script>
-                            var i = 0;
-                            var val = {{cause.total_money}}
-                            var goal = {{cause.goal}}
-                            var percentage = (val / goal) * 100
-                            function makeProgress(){
-                                if(i < percentage){
-                                    i = i + 1;
-                                    $(".progress-bar").css("width", i + "%").text(i + " %");
-                                }
-                                // Wait for sometime before running this script again
-                                setTimeout("makeProgress()", 100);
-                            }
-                            makeProgress();
-                        </script>
                     </div>
                 </div>
             </div>
