@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from .models import Cause, Transaction, Volunteer_Opportunity
-from .forms import TransactionForm
+from .models import Cause, Transaction, Volunteer_Opp,Volunteer_Transaction
+from .forms import TransactionForm, VolunteerSignUpForm
 from django.urls import reverse
 from .forms import TransactionForm, VolunteerForm
 from django.conf import settings
@@ -51,7 +51,15 @@ def checkout(request, pk):
     return render(request, 'donationapp/checkout.html', {'amount':pk})
     
 def volunteer_opportunities(request):
-    latest_volunteer_list = Volunteer_Opportunity.objects.all()
+    latest_volunteer_list = Volunteer_Opp.objects.all()
+    all_transactions = Volunteer_Transaction.objects.all()
+    for cause in latest_volunteer_list:
+        total = 0
+        for transaction in all_transactions:
+            if str(transaction.name) == str(cause.name):
+                total = total + 1
+        cause.total_people = total
+        cause.save()
     context = {'latest_volunteer_list': latest_volunteer_list,'nbar': 'volunteer'}
     return render(request, 'donationapp/volunteer_opportunities.html',context)
 
@@ -63,3 +71,12 @@ def create_opportunity(request):
     context = {'form': form}
 
     return render(request, 'donationapp/create_volunteer', context)
+
+def volunteer_signup(request):
+    form = VolunteerSignUpForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+
+    context = {'form': form}
+
+    return render(request, 'donationapp/volunteer_signup.html', context)

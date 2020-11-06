@@ -9,5 +9,6 @@ urlpatterns = [
     path('causes/', views.causes, name="causes"),
     path('checkout/<int:pk>/', views.checkout, name='checkout'),
     path('volunteering/', views.volunteer_opportunities, name="volunteering"),
-    path('create/', views.create_opportunity, name="create")
+    path('create/', views.create_opportunity, name="create"),
+    path('volunteer/', views.volunteer_signup, name="volunteer")
 ]
