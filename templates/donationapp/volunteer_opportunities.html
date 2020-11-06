@@ -22,7 +22,12 @@
 
                         <h3>{{ volunteer.name }}</h3>
                         <h5>{{volunteer.description}}</h5>
-                        <b> Total People: </b> {{volunteer.total_people}} </br><b> People Needed: </b> {{volunteer.people_needed}}
+                            {% if volunteer.date%}
+                            <b> Date/Time: </b> {{volunteer.date}} from {{volunteer.begin}} to {{volunteer.end}}</br>
+                            {% else %}
+                            <b> Date/Time: </b> No specified date/time </br>
+                            {% endif%}
+                        <b> People Signed Up: </b> {{volunteer.total_people}} </br><b> People Needed: </b> {{volunteer.people_needed}}
 
                         </div>
                     </div>

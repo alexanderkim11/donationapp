@@ -1,10 +1,10 @@
 from django.test import TestCase
 from django.http import HttpRequest, HttpResponseRedirect
 from django.urls import resolve
-from .views import index, account, causes, volunteer_opportunities
+from .views import index, account, causes, volunteer_opportunities, volunteer_signup
 from django.contrib.auth.models import User
 from django.test import Client
-from .models import Cause, Transaction, Volunteer_Opportunity
+from .models import Cause, Transaction, Volunteer_Opp, Volunteer_Transaction
 from django.utils import timezone
 from django.conf import settings
 from importlib import import_module
@@ -51,25 +51,32 @@ class HomePageTest(TestCase):
         self.assertIn('<title>Donation App</title>', html)
 
 class AccountPageTest(TestCase):
-    def test_home_page_returns_correct_html(self):
+    def test_account_page_returns_correct_html(self):
         request = HttpRequest()
         response = account(request)
         html = response.content.decode('utf8')
         self.assertIn('<title>My Account</title>', html)
 
 class CausesPageTest(TestCase):
-    def test_home_page_returns_correct_html(self):
+    def test_cause_page_returns_correct_html(self):
         request = HttpRequest()
         response = causes(request)
         html = response.content.decode('utf8')
         self.assertIn('<title>View Causes</title>', html)
 
 class VolunteeringPageTest(TestCase):
-    def test_home_page_returns_correct_html(self):
+    def test_volunteering_page_returns_correct_html(self):
         request = HttpRequest()
         response = volunteer_opportunities(request)
         html = response.content.decode('utf8')
         self.assertIn('<title>View Volunteer Opportunities</title>', html)
+
+class VolunteerSignUpPageTest(TestCase):
+    def test_signup_page_returns_correct_html(self):
+        request = HttpRequest()
+        response = volunteer_signup(request)
+        html = response.content.decode('utf8')
+        self.assertIn('<title>Volunteer Sign Up</title>', html)
 
 class CauseModelTests(TestCase):
     def test_negative_total(self):
@@ -91,9 +98,40 @@ class TransactionModelTests(TestCase):
 
 class VolunteerOpportunityModelTests(TestCase):
     def test_negative_total(self):
-        cause = Volunteer_Opportunity(name="test", description="testing volunteer opportunities", total_people=-6, people_needed=6)
+        cause = Volunteer_Opp(name="test", description="testing volunteer opportunities", total_people=-6, people_needed=6)
         self.assertTrue(cause, False)
 
     def test_negative_goal(self):
-        cause = Volunteer_Opportunity(name="test", description="testing volunteer opportunities", total_people=6, people_needed=-6)
+        cause = Volunteer_Opp(name="test", description="testing volunteer opportunities", total_people=6, people_needed=-6)
         self.assertTrue(cause, False)
+
+    def test_invalid_date(self):
+        cause = Volunteer_Opp(name="test", description="testing causes", total_people=-10, people_needed=15, date='120',
+                              begin='11:00', end='12:00')
+
+        self.assertTrue(cause, False)
+
+    def test_invalid_time(self):
+        cause = Volunteer_Opp(name="test", description="testing causes", total_people=-10, people_needed=15, date = '10/23/20',
+                              begin='110', end='12:00')
+
+        self.assertTrue(cause, False)
+
+class VolunteerModelTransactionModelTests(TestCase):
+    def test_acceptence_no_date(self):
+        user = User.objects.create(username='donationAppCS3240@gmail.com')
+        user.set_password('CS3240!!')
+        user.save()
+        cause = Volunteer_Opp(name="test", description="testing causes", total_people=-10, people_needed=15)
+        signup = Volunteer_Transaction(name=cause, user=user)
+        self.assertTrue(signup, True)
+
+    def test_acceptence_date(self):
+        user = User.objects.create(username='donationAppCS3240@gmail.com')
+        user.set_password('CS3240!!')
+        user.save()
+        cause = Volunteer_Opp(name="test", description="testing causes", total_people=-10, people_needed=15, date = '10/23/20', begin = '11:00', end = '12:00')
+        signup = Volunteer_Transaction(name=cause, user=user)
+        self.assertTrue(signup, True)
+
+
