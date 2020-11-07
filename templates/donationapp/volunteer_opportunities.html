@@ -8,13 +8,14 @@
 
 {% block content %}
 
-<!{% if latest_volunteer_list %}
+{% if latest_volunteer_list %}
     <ul>
-    </br>Want to create your own volunteer opportunity? Click <a href="{% url 'donationapp:create' %}">here</a>
-
+    {% if user.is_authenticated %}
+        </br>Want to create your own volunteer opportunity? Click <a href="{% url 'donationapp:create' %}">here</a>
+    {% endif %}
     {% for volunteer in latest_volunteer_list %}
     </ul>
-        <div class="container">
+        <div class="container animate__animated animate__fadeInDown">
             <div class="jumbotron">
                 <div class="media">
                     <div class="media-body">
@@ -37,7 +38,10 @@
     {% endfor %}
     </ul>
 {% else %}
-</br>Want to create your own volunteer opportunity? Click <a href="{% url 'donationapp:create' %}">here</a>
+
+    {% if user.is_authenticated %}
+        </br>Want to create your own volunteer opportunity? Click <a href="{% url 'donationapp:create' %}">here</a>
+    {% endif %}
     </br></br></br></br>
     <div class="vertical-center">
         <p style="text-align:center;">No Volunteer Opportunities available at this time.</p>

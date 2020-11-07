@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
       /*#7aa14c	(122,161,76), #86b251	(134,178,81), #a3d468	(163,212,104), #b7ea7b	(183,234,123), #cff99e*/
@@ -75,24 +76,44 @@
 
   </head>
   <body>
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center">
-      <ul class="navbar-nav">
-        <li class="nav-item {% if nbar == 'home' %}active{% endif %}">
-          <a class="nav-link" href="{% url 'donationapp:index' %}">Home</a>
-        </li>
-        <li class="nav-item {% if nbar == 'account' %}active{% endif %}">
-          <a class="nav-link" href="{% url 'donationapp:account' %}">User Information</a>
-        </li>
-        <li class="nav-item {% if nbar == 'causes' %}active{% endif %}">
-          <a class="nav-link" href="{% url 'donationapp:causes' %}">View Causes</a>
-        </li>
-        <li class="nav-item {% if nbar == 'volunteer' %}active{% endif %}">
-          <a class="nav-link" href="{% url 'donationapp:volunteering' %}">View Volunteer Opportunities</a>
-        </li>
-      </ul>
-    </nav>
-        {% block content %}
-        {% endblock %}
+    {% if user.is_authenticated %}
+      <!--Navbar if user is logged in-->
+      <nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center animate__animated animate__slideInDown">
+        <ul class="navbar-nav">
+          <li class="nav-item {% if nbar == 'home' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'donationapp:index' %}">Home</a>
+          </li>
+          <li class="nav-item {% if nbar == 'account' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'donationapp:account' %}">User Information</a>
+          </li>
+          <li class="nav-item {% if nbar == 'causes' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'donationapp:causes' %}">View Causes</a>
+          </li>
+          <li class="nav-item {% if nbar == 'volunteer' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'donationapp:volunteering' %}">View Volunteer Opportunities</a>
+          </li>
+        </ul>
+      </nav>
+    {% else %}
+      <!--Navbar if user is not logged in-->
+      <nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center animate__animated animate__slideInDown">
+        <ul class="navbar-nav">
+          <li class="nav-item {% if nbar == 'home' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'donationapp:index' %}">Home</a>
+          </li>
+          <li class="nav-item {% if nbar == 'causes' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'donationapp:causes' %}">View Causes</a>
+          </li>
+          <li class="nav-item {% if nbar == 'volunteer' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'donationapp:volunteering' %}">View Volunteer Opportunities</a>
+          </li>
+        </ul>
+      </nav>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+        
   </body>
 </html>

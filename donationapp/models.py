@@ -24,7 +24,7 @@ class Transaction(models.Model):
 class Volunteer_Opp(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=512)
-    date = models.DateField('date', null=True)
+    date = models.DateField('date published', null=True)
     begin = models.TimeField(auto_now=False, auto_now_add=False,null=True)
     total_people = models.IntegerField(validators=[MinValueValidator(0)])
     people_needed = models.IntegerField( validators=[MinValueValidator(1)])

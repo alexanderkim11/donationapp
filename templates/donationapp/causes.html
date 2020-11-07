@@ -8,13 +8,13 @@
 
 {% block content %}
 
-<!{% if latest_cause_list %}
+{% if latest_cause_list %}
     <ul>
     </br>
 
     {% for cause in latest_cause_list %}
     </ul>
-        <div class="container">
+        <div class="container animate__animated animate__fadeInDown">
             <div class="jumbotron">
                 <div class="media">
                     <div class="media-body">

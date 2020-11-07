@@ -10,8 +10,8 @@
     {% if user.is_authenticated %}
       <!--Welcome section-->
       <div class="container-fluid bg-1 text-center">
-        <h1>Welcome, {{ user.username }} !</h1>
-        <a href="{% provider_login_url 'google' %}?next={{ request.path }}">Login to Different Account</a>
+        <h1>Welcome, {{ user.first_name|title }} !</h1>
+        <a class="btn btn-primary" href="{% provider_login_url 'google' %}?next={{ request.path }}">Login to Different Account</a>
       </div>
 
       <!--Summary of donation and cause-->
@@ -30,7 +30,7 @@
               <!--Input Form-->
               <form action = "" method = "post"> 
                 {% csrf_token %} 
-                {{form.as_p }} 
+                {{ form.as_p }} 
                 <input type="submit" value="OK">
               </form> 
             </div>
@@ -46,7 +46,7 @@
       <div class="container-fluid-main bg-1 text-center">
         <h1>Welcome to Pocket Pal.</h1>
         <h4>
-          <a href="{% provider_login_url 'google' %}">Login to get started.</a>
+          <a class="btn btn-primary" href="{% provider_login_url 'google' %}">Login to get started.</a>
         </h4>
       </div>
     {% endif %}
