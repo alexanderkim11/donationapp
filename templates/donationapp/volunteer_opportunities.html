@@ -8,10 +8,10 @@
 
 {% block content %}
 
-
+<!{% if latest_volunteer_list %}
     <ul>
     </br>Want to create your own volunteer opportunity? Click <a href="{% url 'donationapp:create' %}">here</a>
-<!{% if latest_volunteer_list %}
+
     {% for volunteer in latest_volunteer_list %}
     </ul>
         <div class="container">
@@ -37,6 +37,7 @@
     {% endfor %}
     </ul>
 {% else %}
+</br>Want to create your own volunteer opportunity? Click <a href="{% url 'donationapp:create' %}">here</a>
     </br></br></br></br>
     <div class="vertical-center">
         <p style="text-align:center;">No Volunteer Opportunities available at this time.</p>

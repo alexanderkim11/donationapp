@@ -20,11 +20,11 @@ class VolunteerForm(ModelForm):
             fields = ["name", "description","date","begin","end","total_people", "people_needed"]
             model.total_people = 0
             widgets = {
+                'name': forms.TextInput(attrs={'class': 'form-control'}),
+                'description': forms.TextInput(attrs={'class': 'form-control'}),
                 'date' : forms.DateInput(),
                 'begin': forms.TimeInput(),
                 'end': forms.TimeInput(),
-                'name': forms.TextInput(attrs={'class': 'form-control'}),
-                'description': forms.TextInput(attrs={'class': 'form-control'}),
 
 
             }
