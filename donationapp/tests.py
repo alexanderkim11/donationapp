@@ -107,13 +107,13 @@ class VolunteerOpportunityModelTests(TestCase):
 
     def test_invalid_date(self):
         cause = Volunteer_Opp(name="test", description="testing causes", total_people=-10, people_needed=15, date='120',
-                              begin='11:00', end='12:00')
+                              begin='11:00')
 
         self.assertTrue(cause, False)
 
     def test_invalid_time(self):
         cause = Volunteer_Opp(name="test", description="testing causes", total_people=-10, people_needed=15, date = '10/23/20',
-                              begin='110', end='12:00')
+                              begin='110')
 
         self.assertTrue(cause, False)
 
@@ -130,7 +130,7 @@ class VolunteerModelTransactionModelTests(TestCase):
         user = User.objects.create(username='donationAppCS3240@gmail.com')
         user.set_password('CS3240!!')
         user.save()
-        cause = Volunteer_Opp(name="test", description="testing causes", total_people=-10, people_needed=15, date = '10/23/20', begin = '11:00', end = '12:00')
+        cause = Volunteer_Opp(name="test", description="testing causes", total_people=-10, people_needed=15, date = '10/23/20', begin = '11:00')
         signup = Volunteer_Transaction(name=cause, user=user)
         self.assertTrue(signup, True)
 
