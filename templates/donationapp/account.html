@@ -15,6 +15,27 @@
             <div class="media-body">
               <h3 class="mt-0">{{ user.first_name }}</h3>
               Hello my name is {{ user.first_name}} <br> <br>
+                 <a href="{% provider_login_url "google" %}?next={{ request.path }}" class="btn btn-primary">Login to Different Account</a>
+             </div>
+              <br>
+              <br>
+              <!--Progress bar-->
+              </div></div>
+              <h2 class="mt-0">Current Level: {{level}} </h2>
+
+
+              <div class="progress" >
+                  <div class="progress-bar progress-bar-success" id = {{user.email}}></div>
+                  <!-- jQuery Script to dynamically change progress bar-->
+                  <script>
+                    var x = document.getElementById("{{user.email}}");
+                    var total_raised = "{{total_raised}}";
+                    var val = (total_raised % 100);
+                    x.style.width = val + "%";
+                    x.innerHTML += val + "%";
+                  </script>
+                  </div>
+            </div>
               <a href="{% provider_login_url "google" %}?next={{ request.path }}" class="btn btn-primary">Login to Different Account</a>
              </div>
           </div>

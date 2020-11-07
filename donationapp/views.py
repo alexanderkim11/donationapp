@@ -30,7 +30,18 @@ def index(request):
     return render(request, "donationapp/index.html", context)
 
 def account(request):
-    return render(request, "donationapp/account.html",{'nbar': 'account'})
+    # calculate total amount raised by the current user
+    total_raised = 0
+    if request.method == 'GET':
+        all_transactions = Transaction.objects.filter(user = request.user)
+        for transaction in all_transactions:
+            total_raised = total_raised + transaction.amount
+    level = total_raised // 100
+
+    context = {'nbar': 'account', 'total_raised': total_raised, 'level' : level}
+    return render(request, "donationapp/account.html",context)
+
+
 
 def causes(request):
     latest_cause_list = Cause.objects.all()
