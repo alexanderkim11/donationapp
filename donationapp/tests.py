@@ -73,6 +73,11 @@ class VolunteeringPageTest(TestCase):
 
 class VolunteerSignUpPageTest(TestCase):
     def test_signup_page_returns_correct_html(self):
+        user = User.objects.create(username='donationAppCS3240@gmail.com')
+        user.set_password('CS3240!!')
+        user.save()
+        client = Client()
+        client.login(username='donationAppCS3240@gmail.com', password='CS3240!!')
         request = HttpRequest()
         response = volunteer_signup(request)
         html = response.content.decode('utf8')
