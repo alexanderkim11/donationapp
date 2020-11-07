@@ -45,14 +45,22 @@ class Login_Test_Case_Capitalization(TestCase):
 #These just tell whether loads to the right page
 class HomePageTest(TestCase):
     def test_home_page_returns_correct_html(self):
+        user = User.objects.create(username='donationAppCS3240@gmail.com')
+        user.set_password('CS3240!!')
+        user.save()
         request = HttpRequest()
+        request.user = user
         response = index(request)
         html = response.content.decode('utf8')
         self.assertIn('<title>Donation App</title>', html)
 
 class AccountPageTest(TestCase):
     def test_account_page_returns_correct_html(self):
+        user = User.objects.create(username='donationAppCS3240@gmail.com')
+        user.set_password('CS3240!!')
+        user.save()
         request = HttpRequest()
+        request.user = user
         response = account(request)
         html = response.content.decode('utf8')
         self.assertIn('<title>My Account</title>', html)
@@ -76,9 +84,8 @@ class VolunteerSignUpPageTest(TestCase):
         user = User.objects.create(username='donationAppCS3240@gmail.com')
         user.set_password('CS3240!!')
         user.save()
-        client = Client()
-        client.login(username='donationAppCS3240@gmail.com', password='CS3240!!')
         request = HttpRequest()
+        request.user = user
         response = volunteer_signup(request)
         html = response.content.decode('utf8')
         self.assertIn('<title>Volunteer Sign Up</title>', html)
