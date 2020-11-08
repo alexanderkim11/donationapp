@@ -1,20 +1,21 @@
 {% extends 'donationapp/base.html' %}
 {% load socialaccount %}
+{% load static %}
 
 {% block title %}
-<title>My Account</title>
+  <title>My Account</title>
 {% endblock  %}
 
 {% block content %}
-</br>
-    <div class="container">
+  <br>
+    <div class="container animate__animated animate__fadeInDown">
       <div class="jumbotron">
         <div class="p-5" >
           <div class="media">
             <img src="{{user.socialaccount_set.all.0.get_avatar_url}}" class="mr-3 rounded-circle account-img" alt="..." width = 125px height = 125px>
             <div class="media-body">
-              <h3 class="mt-0">{{ user.first_name }}</h3>
-              Hello my name is {{ user.first_name}} <br> <br>
+              <h3 class="mt-0">{{ user.first_name|title }}</h3>
+              Hello my name is {{ user.first_name|title }} <br> <br>
                  <a href="{% provider_login_url "google" %}?next={{ request.path }}" class="btn btn-primary">Login to Different Account</a>
              </div>
               <br>
@@ -40,4 +41,17 @@
         </div>
       </div>
     </div>
+
+    <br> 
+
+    <div class="flexcontainer">
+      <div class="container highestDonation">
+          
+      </div>
+      <div class="container favoriteCauses">
+          
+      </div>
+    <div>
+
+    
 {% endblock %}

@@ -5,13 +5,11 @@ from .models import Transaction, Volunteer_Opp, Volunteer_Transaction
 class TransactionForm(ModelForm):
     class Meta:
             model = Transaction
-            fields = ["amount", "cause", "user", "date"]
+            fields = ["amount", "cause"]
 
             widgets = {
                 'amount': forms.TextInput(attrs={'class': 'form-control'}),
                 'cause': forms.Select(attrs={'class': 'form-control'}),
-                'user': forms.Select(attrs={'class': 'form-control'}),
-                'date': forms.TextInput(attrs={'class': 'form-control'}),
             }
 
 class VolunteerForm(ModelForm):
