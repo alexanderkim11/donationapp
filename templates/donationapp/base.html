@@ -70,6 +70,30 @@
         padding-bottom: 20px;
         background-color: #FFFFDE;
      }
+     .res-circle {
+        width: 20%;
+        border-radius: 50%;
+        line-height: 0;
+        background: #bcd6ff;
+        /* NECESSARY FOR TEXT */
+        position: relative;
+        margin-right: 20px;
+      }
+      .res-circle:after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+      }
+    .circle-txt {
+      position: absolute;
+      bottom: 50%;
+      width: 100%;
+      text-align: center;
+      /* NOT IMPORTANT */
+      font-family: arial, sans-serif;
+      font-size: 2em;
+      font-weight: bold;
+    }
 }
 
     </style>

@@ -43,8 +43,10 @@ def account(request):
         for transaction in all_transactions:
             total_raised = total_raised + transaction.amount
     level = total_raised // 100
+    next_level = level + 1
+    level_up = 100 - (total_raised % 100)
 
-    context = {'nbar': 'account', 'total_raised': total_raised, 'level' : level}
+    context = {'nbar': 'account', 'total_raised': total_raised, 'level' : level, 'next_level': next_level,'level_up': level_up}
     return render(request, "donationapp/account.html",context)
 
 
