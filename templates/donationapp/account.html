@@ -23,6 +23,7 @@
               <!--Progress bar-->
               </div></div>
               <h2 class="mt-0">Current Level: {{level}} </h2>
+              <h2 class="mt-0">Donate ${{level_up}} to reach Level {{next_level}}.</h2>
 
 
               <div class="progress" >
@@ -38,6 +39,169 @@
                   </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <!-- Trophy case -->
+    <div class="container animate__animated animate__fadeInDown">
+      <div class="jumbotron">
+        <div class="p-5" >
+          <center>
+          <h2 class="mt-0" style='margin-bottom: 50px;'><center>Trophy Case</center></h2>
+          
+          <div class="res-circle" id = 'raised_100' style='display:inline-block; right-margin: 100px'>
+            <div class="circle-txt" id = 'raised_100_text'>
+              $100
+              {% if total_raised > 100 %}
+                <script>
+                  var x = document.getElementById('raised_100')
+                  var txt = document.getElementById('raised_100_text')
+                  x.style.background = '#73AD21'
+                  txt.style.color = '#FFFFFF'
+                </script>
+              {% else %}
+                <script>
+                  var x = document.getElementById('raised_100')
+                  x.style.background = '#A9A9A9'
+                </script>
+              {% endif %}
+            </div>
+          </div>
+          
+          <div class="res-circle" id = 'raised_200' style='display:inline-block;'>
+            <div class="circle-txt" id = 'raised_200_text'>
+              $200
+              {% if total_raised > 200 %}
+                <script>
+                  var x = document.getElementById('raised_200')
+                  var txt = document.getElementById('raised_200_text')
+                  x.style.background = '#73AD21'
+                  txt.style.color = '#FFFFFF'
+                </script>
+              {% else %}
+                <script>
+                  var x = document.getElementById('raised_200')
+                  x.style.background = '#A9A9A9'
+                </script>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="res-circle" id = 'raised_500' style='display:inline-block;'>
+            <div class="circle-txt" id = 'raised_500_text'>
+              $500
+              {% if total_raised > 500 %}
+                <script>
+                  var x = document.getElementById('raised_500')
+                  var txt = document.getElementById('raised_500_text')
+                  x.style.background = '#73AD21'
+                  txt.style.color = '#FFFFFF'
+                </script>
+              {% else %}
+                <script>
+                  var x = document.getElementById('raised_500')
+                  x.style.background = '#A9A9A9'
+                </script>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="res-circle" id = 'raised_1000' style='display:inline-block;'>
+            <div class="circle-txt" id = 'raised_1000_text'>
+              $1000
+              {% if total_raised > 1000 %}
+                <script>
+                  var x = document.getElementById('raised_1000')
+                  var txt = document.getElementById('raised_1000_text')
+                  x.style.background = '#73AD21'
+                  txt.style.color = '#FFFFFF'
+                </script>
+              {% else %}
+                <script>
+                  var x = document.getElementById('raised_1000')
+                  x.style.background = '#A9A9A9'
+                </script>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="res-circle" id = 'raised_1500' style='display:inline-block;'>
+            <div class="circle-txt" id = 'raised_1500_text'>
+              $1500
+              {% if total_raised > 1500 %}
+                <script>
+                  var x = document.getElementById('raised_1500')
+                  var txt = document.getElementById('raised_1500_text')
+                  x.style.background = '#73AD21'
+                  txt.style.color = '#FFFFFF'
+                </script>
+              {% else %}
+                <script>
+                  var x = document.getElementById('raised_1500')
+                  x.style.background = '#A9A9A9'
+                </script>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="res-circle" id = 'raised_2000' style='display:inline-block;'>
+            <div class="circle-txt" id = 'raised_2000_text'>
+              $2000
+              {% if total_raised > 2000 %}
+                <script>
+                  var x = document.getElementById('raised_2000')
+                  var txt = document.getElementById('raised_2000_text')
+                  x.style.background = '#73AD21'
+                  txt.style.color = '#FFFFFF'
+                </script>
+              {% else %}
+                <script>
+                  var x = document.getElementById('raised_2000')
+                  x.style.background = '#A9A9A9'
+                </script>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="res-circle" id = 'raised_3000' style='display:inline-block;'>
+            <div class="circle-txt" id = 'raised_3000_text'>
+              $3000
+              {% if total_raised > 3000 %}
+                <script>
+                  var x = document.getElementById('raised_3000')
+                  var txt = document.getElementById('raised_3000_text')
+                  x.style.background = '#73AD21'
+                  txt.style.color = '#FFFFFF'
+                </script>
+              {% else %}
+                <script>
+                  var x = document.getElementById('raised_3000')
+                  x.style.background = '#A9A9A9'
+                </script>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="res-circle" id = 'raised_5000' style='display:inline-block;'>
+            <div class="circle-txt" id = 'raised_5000_text'>
+              $5000
+              {% if total_raised > 5000 %}
+                <script>
+                  var x = document.getElementById('raised_5000')
+                  var txt = document.getElementById('raised_5000_text')
+                  x.style.background = '#73AD21'
+                  txt.style.color = '#FFFFFF'
+                </script>
+              {% else %}
+                <script>
+                  var x = document.getElementById('raised_5000')
+                  x.style.background = '#A9A9A9'
+                </script>
+              {% endif %}
+            </div>
+          </div>
+
+        </center>
         </div>
       </div>
     </div>
