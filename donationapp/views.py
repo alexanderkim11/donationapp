@@ -38,8 +38,8 @@ def index(request):
 def account(request):
     # calculate total amount raised by the current user
     total_raised = 0
+    all_transactions = Transaction.objects.filter(user = request.user)
     if request.method == 'GET':
-        all_transactions = Transaction.objects.filter(user = request.user)
         for transaction in all_transactions:
             total_raised = total_raised + transaction.amount
     level = total_raised // 100
