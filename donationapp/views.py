@@ -38,15 +38,15 @@ def index(request):
 def account(request):
     # calculate total amount raised by the current user
     total_raised = 0
+    all_transactions = Transaction.objects.filter(user = request.user)
     if request.method == 'GET':
-        all_transactions = Transaction.objects.filter(user = request.user)
         for transaction in all_transactions:
             total_raised = total_raised + transaction.amount
     level = total_raised // 100
     next_level = level + 1
     level_up = 100 - (total_raised % 100)
 
-    context = {'nbar': 'account', 'total_raised': total_raised, 'level' : level, 'next_level': next_level,'level_up': level_up}
+    context = {'nbar': 'account', 'all_transactions': all_transactions, 'total_raised': total_raised, 'level' : level, 'next_level': next_level,'level_up': level_up}
     return render(request, "donationapp/account.html",context)
 
 
