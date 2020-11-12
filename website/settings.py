@@ -180,3 +180,7 @@ MEDIA_URL = '/media/'
 
 #django_heroku.settings(locals())
 # Activate Django-Heroku.
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+PREPEND_WWW = True
