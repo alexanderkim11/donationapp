@@ -7,6 +7,79 @@
 {% endblock  %}
 
 {% block content %}
+
+  <!-- Style section for Transaction History table-->
+  <style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th {
+    color: white;
+    background-color: #4ccc40;
+    font-size: 1.25em;
+    border: 0px solid #dddddd;
+    border-top: none;
+    padding: 20px;
+    text-align: left;
+  }
+
+  th:first-child {
+    border-top-left-radius: 25px;
+    border: 0px solid #dddddd;
+  }
+
+  th:last-child {
+    border-top-right-radius: 25px;
+    border: 0px solid #dddddd;
+  }
+
+  td {
+    background-color:#dcfdb6ad;
+    border-top: 1px solid rgba(0, 0, 0, 0.349);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.356) ;
+    padding: 15px;
+    text-align: left;
+    font: bold arial, sans-serif;
+  }
+
+
+  td:first-child {
+    border-left: none;
+  }
+
+  td:last-child {
+    border-right: none;
+  }
+
+  tr:first-child td:first-child { 
+    border-top-left-radius: 25px; 
+  }
+
+  tr:first-child td:last-child { 
+    border-top-right-radius: 25px; 
+  }
+
+  tr:last-child td:first-child { 
+    border-bottom-left-radius: 25px;
+    border-bottom: none;
+    border-left: none; 
+  }
+
+  tr:last-child td:last-child { 
+    border-bottom-right-radius: 25px;
+    border-bottom: none;
+    border-right: none; 
+  }
+  tr:last-child td:not(:first-child):not(:last-child) {
+    border-bottom: none;
+  }
+
+  tr:hover {background-color: #9b9b9b;}
+  </style>
+
   <br>
     <div class="container animate__animated animate__fadeInDown">
       <div class="jumbotron">
@@ -42,6 +115,7 @@
         </div>
       </div>
     </div>
+
     <!-- Trophy case -->
     <div class="container animate__animated animate__fadeInDown">
       <div class="jumbotron">
@@ -207,6 +281,33 @@
     </div>
 
     <br> 
+
+
+  <!-- Trophy case -->
+    <div class="container animate__animated animate__fadeInDown">
+      <div class="jumbotron">
+        <div class="p-5" style="overflow-y:auto;" >
+          <h1 class="mt-0" style='margin-bottom: 30px;'>Transaction History</h1>
+            <table class="styled-table">
+              <tr>
+                <th>Date</th>
+                <th>Cause</th>
+                <th>Amount</th>
+              </tr>
+              {% if all_transactions %}
+                {% for transaction in all_transactions %}
+                  <tr>
+                    <td><b>{{transaction.date}}</b></td>
+                    <td>{{transaction.cause.name}}</td>
+                    <td>${{transaction.amount}}</td>
+                  </tr>
+                {% endfor %}
+              {% endif %}
+          </table>
+        </div>
+      </div>
+    </div>
+
 
     <div class="flexcontainer">
       <div class="container highestDonation">
