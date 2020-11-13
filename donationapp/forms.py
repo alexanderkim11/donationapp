@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import Transaction, Volunteer_Opp, Volunteer_Transaction
+import datetime
 
 class TransactionForm(ModelForm):
     class Meta:
@@ -20,21 +21,28 @@ class VolunteerForm(ModelForm):
             widgets = {
                 'name': forms.TextInput(attrs={'class': 'form-control'}),
                 'description': forms.TextInput(attrs={'class': 'form-control'}),
-                'date' : forms.DateInput(),
-                'begin': forms.TimeInput(),
-
+                'date' : forms.DateInput(attrs={'class': 'form-control'}),
+                'begin': forms.TimeInput(attrs={'class': 'form-control'}),
+                'total_people': forms.TextInput(attrs={'class': 'form-control'}),
+                'people_needed': forms.TextInput(attrs={'class': 'form-control'}),
 
             }
             labels = {
                 'total_people' : 'People signed up',
-                'people_needed' : 'Total People Needed'
+                'people_needed' : 'Total People Needed',
+                'date': 'Date'
             }
+
+    def clean_date(self):
+        date = self.cleaned_data['date']
+        if date < datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the past!")
+        return date
 
 class VolunteerSignUpForm(ModelForm):
     class Meta:
             model = Volunteer_Transaction
-            fields = ["name", "user"]
+            fields = ["name"]
             widgets = {
                 'name': forms.Select(attrs={'class': 'form-control'}),
-                'user': forms.Select(attrs={'class': 'form-control'}),
             }
