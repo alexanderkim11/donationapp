@@ -26,18 +26,35 @@
           <div class="container-fluid-sub bg-4 text-center">
 
             <!--Container for input options-->
+
             <div id="donation_input_sub_box">
+              <h4>Donate</h4><br/>
               <!--Input Form-->
-              <form action = "" method = "post"> 
-                {% csrf_token %} 
-                {{ form.as_p }} 
-                <input type="submit" value="OK">
-              </form> 
+              <form method="post"action="" >
+                {% csrf_token %}
+                {{form1.as_p }}
+                <input type="submit" name="donate" value="Donate" />
+            </form>
             </div>
           </div>
         </div>
-        <div style="" class="button-box" >
-            <button onclick="location.href = '/donationapp/volunteer'">Volunteer</button>
+
+        <div id="volunteer_input_container">
+          <div class="container-fluid-sub bg-4 text-center">
+
+            <!--Container for input options-->
+
+            <div id="volunteer_input_sub_box">
+              <h4>Volunteer</h4>
+               <h6>{{message}}</h6><br/>
+              <!--Input Form-->
+              <form method="post"action="" >
+                {% csrf_token %}
+                {{form2.as_p }}
+                <input type="submit" name="volunteer" value="Volunteer" />
+            </form>
+            </div>
+          </div>
         </div>
       </div>
       

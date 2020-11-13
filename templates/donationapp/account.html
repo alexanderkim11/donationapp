@@ -308,6 +308,31 @@
       </div>
     </div>
 
+<!-- Volunteer  List -->
+    <div class="container animate__animated animate__fadeInDown">
+      <div class="jumbotron">
+        <div class="p-5" style="overflow-y:auto;" >
+          <h1 class="mt-0" style='margin-bottom: 30px;'>Upcoming Volunteer Events</h1>
+            <table class="styled-table">
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Cause</th>
+              </tr>
+              {% if volunteer_opps %}
+                {% for transaction in volunteer_opps%}
+                  <tr>
+                    <td><b>{{transaction.date}}</b></td>
+                    <td>{{transaction.begin}}</td>
+                    <td>{{transaction.name}}</td>
+                  </tr>
+                {% endfor %}
+              {% endif %}
+          </table>
+        </div>
+      </div>
+    </div>
+
 
     <div class="flexcontainer">
       <div class="container highestDonation">

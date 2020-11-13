@@ -3,7 +3,6 @@ import os
 
 #import django_heroku
 
-
 """
 Django settings for website project.
 
@@ -36,8 +35,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["https://website-1-36.herokuapp.com/",
 "localhost",
+"127.0.0.1",
+"http://www.localhost:8000/"
+]
+
+SECURE_REDIRECT_EXEMPT = ["https://website-1-36.herokuapp.com/",
+"localhost",
 "127.0.0.1"
 ]
+
+
 
 
 # Application definition
@@ -180,3 +187,6 @@ MEDIA_URL = '/media/'
 
 #django_heroku.settings(locals())
 # Activate Django-Heroku.
+
+
+

@@ -13,32 +13,58 @@ import datetime
 
 # Create your views here.
 def index(request):
-    form = TransactionForm()
+    form1 = TransactionForm(request.POST or None)
+    form2 = VolunteerSignUpForm(request.POST or None)
+    message = ''
 
     # if request.method == 'GET': # accessing website
-    if request.method == 'POST': # submitting to form
-        form = TransactionForm(request.POST)
-        form.instance.user = request.user
-        form.instance.date = datetime.datetime.now()
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('donationapp:checkout', kwargs={'pk':form.cleaned_data['amount']}))
-        
+    #if request.method == 'POST':  # submitting to form
+    if 'volunteer' in request.POST:
+        form2.instance.user = request.user
+        all_transactions = Volunteer_Transaction.objects.all()
+        new_request = True
+        if form2.is_valid():
+            model_instance = form2.save(commit=False)
+            for transaction in all_transactions:
+                if transaction.name == model_instance.name and transaction.user == model_instance.user:
+                    new_request = False
+            if new_request:
+                form2.save()
+            else:
+                message = "You have already signed up for this opportunity"
+    elif 'donate' in request.POST:
+        form1.instance.user = request.user
+        form1.instance.date = datetime.datetime.now()
+        if form1.is_valid():
+            form1.save()
+            return HttpResponseRedirect(reverse('donationapp:checkout', kwargs={'pk': form1.cleaned_data['amount']}))
+
     # calculate total amount raised by the current user
     total_raised = 0
     if request.user.is_authenticated and request.method == 'GET':
-        all_transactions = Transaction.objects.filter(user = request.user)
+        all_transactions = Transaction.objects.filter(user=request.user)
         for transaction in all_transactions:
             total_raised = total_raised + transaction.amount
 
-    context = {'form': form,'nbar': 'home', 'total_raised': total_raised}
+    context = {'form1': form1, 'form2': form2, 'nbar': 'home', 'total_raised': total_raised, 'message': message}
     return render(request, "donationapp/index.html", context)
+
 
 @login_required
 def account(request):
     # calculate total amount raised by the current user
     total_raised = 0
     all_transactions = Transaction.objects.filter(user = request.user)
+    all_volunteer_transactions = Volunteer_Transaction.objects.filter(user = request.user)
+    latest_volunteer_list= Volunteer_Opp.objects.order_by('date')
+
+    volunteer_opps = []
+    for opp in latest_volunteer_list:
+        for transaction in all_volunteer_transactions:
+            if str(transaction.name) == str(opp.name) and opp.date >=  datetime.date.today():
+                volunteer_opps.append(opp)
+
+
     if request.method == 'GET':
         for transaction in all_transactions:
             total_raised = total_raised + transaction.amount
@@ -46,7 +72,7 @@ def account(request):
     next_level = level + 1
     level_up = 100 - (total_raised % 100)
 
-    context = {'nbar': 'account', 'all_transactions': all_transactions, 'total_raised': total_raised, 'level' : level, 'next_level': next_level,'level_up': level_up}
+    context = {'nbar': 'account', 'all_transactions': all_transactions,'volunteer_opps':volunteer_opps, 'total_raised': total_raised, 'level' : level, 'next_level': next_level,'level_up': level_up}
     return render(request, "donationapp/account.html",context)
 
 
@@ -87,18 +113,11 @@ def volunteer_opportunities(request):
 def create_opportunity(request):
     form = VolunteerForm(request.POST or None)
     if form.is_valid():
+        if form.instance.date != None:
+            form.clean_date()
         form.save()
-
     context = {'form': form}
 
     return render(request, 'donationapp/create_volunteer', context)
 
-@login_required
-def volunteer_signup(request):
-    form = VolunteerSignUpForm(request.POST or None)
-    if form.is_valid():
-        form.save()
 
-    context = {'form': form}
-
-    return render(request, 'donationapp/volunteer_signup.html', context)
