@@ -36,12 +36,13 @@ def index(request):
         form1.instance.user = request.user
         form1.instance.date = datetime.datetime.now()
         if form1.is_valid():
+            request.session['amount'] = request.POST['amount']
             form1.save()
-            return HttpResponseRedirect(reverse('donationapp:checkout', kwargs={'pk': form1.cleaned_data['amount']}))
+            return HttpResponseRedirect(reverse('donationapp:checkout'))
 
     # calculate total amount raised by the current user
     total_raised = 0
-    if request.user.is_authenticated and request.method == 'GET':
+    if request.user.is_authenticated:
         all_transactions = Transaction.objects.filter(user=request.user)
         for transaction in all_transactions:
             total_raised = total_raised + transaction.amount
@@ -93,8 +94,8 @@ def causes(request):
     return render(request, 'donationapp/causes.html',context)
 
 @login_required
-def checkout(request, pk):
-    return render(request, 'donationapp/checkout.html', {'amount':pk})
+def checkout(request):
+    return render(request, 'donationapp/checkout.html', {'amount' : request.session.get('amount')})
 
 def volunteer_opportunities(request):
     latest_volunteer_list = Volunteer_Opp.objects.all()
