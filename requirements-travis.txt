@@ -3,4 +3,3 @@ gunicorn
 django-heroku
 django-allauth
 dj-database-url
-psycopg2

@@ -3,4 +3,3 @@ django-heroku
 Django
 django-allauth
 dj-database-url
-psycopg2
