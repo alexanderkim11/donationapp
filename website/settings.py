@@ -115,6 +115,10 @@ DATABASES = {
         'HOST': 'ec2-3-91-139-25.compute-1.amazonaws.com',
 
         'PORT': '5432',
+        
+        'TEST': {
+                'NAME': 'd7osdssadag0ugv5', #This is an important entry
+            }
 
     }
 }
