@@ -30,7 +30,7 @@
                             <!--change progress bar-->
                             <script>
                                 var x = document.getElementById("{{cause.name}}");
-                                var val = ({{cause.total_money}} / {{cause.goal}} * 100);
+                                var val = ({{cause.total_money}} / {{cause.goal}} * 100).toFixed(1);
                                 x.style.width = val + "%";
                                 x.innerHTML += val + "%";
                             </script>
