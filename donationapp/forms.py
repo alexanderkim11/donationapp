@@ -4,6 +4,8 @@ from .models import Transaction, Volunteer_Opp, Volunteer_Transaction
 import datetime
 
 class TransactionForm(ModelForm):
+    error_css_class = 'error'
+    required_css_class = 'required'
     class Meta:
             model = Transaction
             fields = ["amount", "cause"]
@@ -14,6 +16,8 @@ class TransactionForm(ModelForm):
             }
 
 class VolunteerForm(ModelForm):
+    error_css_class = 'error'
+    required_css_class = 'required'
     class Meta:
             model = Volunteer_Opp
             fields = ["name", "description","date","begin","total_people", "people_needed"]
@@ -40,6 +44,8 @@ class VolunteerForm(ModelForm):
         return date
 
 class VolunteerSignUpForm(ModelForm):
+    error_css_class = 'error'
+    required_css_class = 'required'
     class Meta:
             model = Volunteer_Transaction
             fields = ["name"]

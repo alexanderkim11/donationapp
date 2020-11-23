@@ -69,6 +69,7 @@ def index(request):
         form1.instance.date = datetime.datetime.now()
         if form1.is_valid():
             request.session['amount'] = request.POST['amount']
+            request.session['cause'] = request.POST['cause']
             form1.save()
             return HttpResponseRedirect(reverse('donationapp:checkout'))
 
@@ -128,6 +129,12 @@ def causes(request):
 @login_required
 def checkout(request):
     return render(request, 'donationapp/checkout.html', {'amount' : request.session.get('amount')})
+
+@login_required
+def checkout_confirmation(request):
+    cause = Cause.objects.get(pk=request.session.get('cause'))
+    return render(request, 'donationapp/checkout_confirmation.html', {'amount' : request.session.get('amount'), 
+        'cause' : cause})
 
 def volunteer_opportunities(request):
     latest_volunteer_list = Volunteer_Opp.objects.all()

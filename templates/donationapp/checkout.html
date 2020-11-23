@@ -1,3 +1,21 @@
+<!-- /***************************************************************************************
+*  REFERENCES
+*  Title: Django Paypal Documentation
+*  Author: Django-Paypal
+*  Date: 11/23/2020
+*  Code version: v1.0.0
+*  URL: https://django-paypal.readthedocs.io/en/stable/
+*  Software License: MIT License
+
+*  Title: How To - Redirect to Another Webpage
+*  Author: W3schools
+*  Date: 11/23/2020
+*  Code version: v1.0.0
+*  URL: https://www.w3schools.com/howto/howto_js_redirect_webpage.asp
+*  Software License: Fair Use
+
+***************************************************************************************/ -->
+
 {% extends 'donationapp/base.html' %}
 {% load socialaccount %}
 
@@ -38,6 +56,7 @@
 
                 // Finalize the transaction
                 onApprove: function(data, actions) {
+                    window.location.href = "/donationapp/checkout_confirmation";
                     return actions.order.capture().then(function(details) {
                         // Show a success message to the buyer
                         alert('Transaction completed by ' + details.payer.name.given_name + '!');

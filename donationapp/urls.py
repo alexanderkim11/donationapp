@@ -9,5 +9,6 @@ urlpatterns = [
     path('causes/', views.causes, name="causes"),
     path('checkout/', views.checkout, name='checkout'),
     path('volunteering/', views.volunteer_opportunities, name="volunteering"),
-    path('create/', views.create_opportunity, name="create")
+    path('create/', views.create_opportunity, name="create"),
+    path('checkout_confirmation/', views.checkout_confirmation, name="checkout_confirmation"),
 ]

@@ -1,0 +1,15 @@
+{% extends 'donationapp/base.html' %}
+{% load socialaccount %}
+
+{% block title %}
+<title>Thank You</title>
+{% endblock  %}
+
+{% block content %}
+<br> 
+    <div class="container" style="text-align:center"> 
+        <h3>Donation Complete!</h3>
+        <p>Your donation of {{amount}} USD has been successfully processed. Thank you for supporting the {{cause.name}}. <br> 
+        Feel free to screen shot this page for your records. </p>
+    </div>
+{% endblock %}
