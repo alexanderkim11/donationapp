@@ -65,11 +65,11 @@ def index(request):
             else:
                 message = "You have already signed up for this opportunity"
     elif 'donate' in request.POST:
-        form1.instance.user = request.user
-        form1.instance.date = datetime.datetime.now()
+        # form1.instance.user = request.user
+        # form1.instance.date = datetime.datetime.now()
         if form1.is_valid():
             request.session['amount'] = request.POST['amount']
-            form1.save()
+            request.session['cause'] = request.POST['cause']
             return HttpResponseRedirect(reverse('donationapp:checkout'))
 
     # calculate total amount raised by the current user
@@ -128,6 +128,18 @@ def causes(request):
 @login_required
 def checkout(request):
     return render(request, 'donationapp/checkout.html', {'amount' : request.session.get('amount')})
+
+@login_required
+def checkout_confirmation(request):
+    cause = Cause.objects.get(pk=request.session.get('cause'))
+    transaction = Transaction()
+    transaction.user = request.user
+    transaction.date = datetime.datetime.now()
+    transaction.amount = request.session.get('amount')
+    transaction.cause = cause
+    transaction.save()
+    return render(request, 'donationapp/checkout_confirmation.html', {'amount' : request.session.get('amount'), 
+        'cause' : cause})
 
 def volunteer_opportunities(request):
     latest_volunteer_list = Volunteer_Opp.objects.all()
