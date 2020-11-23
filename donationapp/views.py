@@ -1,3 +1,35 @@
+# /***************************************************************************************
+# *  REFERENCES
+# *  Title: Django - Form Processing
+# *  Author: tutorialspoint
+# *  Date: 10/10/20
+# *  Code version: v1.0.0
+# *  URL: https://www.tutorialspoint.com/django/django_form_processing.htm
+# *  Software License: Fair Use
+# *
+# *  Title: Django Forms
+# *  Author: Educba
+# *  Date: 10/12/20
+# *  Code version: v1.0.0
+# *  URL: https://www.educba.com/django-forms/
+# *  Software License: Fair Use
+# *
+# *  Title: Django Tutorial Part 9: Working with forms
+# *  Author: MDN web docs
+# *  Date: 10/16/20
+# *  Code version: v1.0.0
+# *  URL: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Forms
+# *  Software License: Fair Use
+# *
+# *  Title: Working with forms
+# *  Author: django
+# *  Date: 10/18/20
+# *  Code version: 3.1.3
+# *  URL: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Forms
+# *  Software License: BSD-3
+# *
+# ***************************************************************************************
+
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
