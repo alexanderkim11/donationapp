@@ -21,6 +21,13 @@
 *  URL: https://www.tutorialspoint.com/django/django_form_processing.htm
 *  Software License: Fair Use
 *
+*  Title: django display message after POST form submit
+*  Authors: damio and Krishna Kumar Jangid from stackoverflow
+*  Date: 11/23/2020
+*  Code version: v1.0.0
+*  URL:https://stackoverflow.com/questions/28723266/django-display-message-after-post-form-submit
+*  Software License: Fair Use
+*
 *  Title: Redirect to a div on a different page with smooth scrolling?
 *  Author: lmgonzalves
 *  Date: 11/22/20
@@ -40,11 +47,32 @@
     <!--Once the user logs in-->
     {% if user.is_authenticated %}
       <!--Welcome section-->
+      {% if messages %}
+      <div class="container-fluid-sub bg-5  text-center">
+        </br>
+        <div id="volunteer_submission__box">
+          <div class="container-fluid-sub  text-center">
+              <div class="media">
+                  <div class="media-body">
+                        {% for message in messages %}
+                          <h3> {{ message }}</h3>
+                        {% endfor %}
+
+                    </div>
+                </div>
+           </div>
+        </div>
+        <div class="container-fluid-with-popup bg-1 text-center">
+        <h1>Welcome, {{ user.first_name|title }} !</h1>
+        <a class="btn btn-primary" href="{% provider_login_url 'google' %}?next={{ request.path }}">Login to Different Account</a>
+      </div>
+      </div>
+      {% else %}
       <div class="container-fluid bg-1 text-center">
         <h1>Welcome, {{ user.first_name|title }} !</h1>
         <a class="btn btn-primary" href="{% provider_login_url 'google' %}?next={{ request.path }}">Login to Different Account</a>
       </div>
-
+      {% endif %}
       <!--Summary of donation and cause-->
       <div class="container-fluid bg-2 text-center">
         <h3>So far, you have donated ${{total_raised}}.</h3>

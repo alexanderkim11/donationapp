@@ -1,3 +1,20 @@
+# /***************************************************************************************
+# *  REFERENCES
+# *  Title: How should I write tests for forms in django?
+# *  Author:Torsten Engelbrecht from stack overflow
+# *  Date: 11/13/20
+# *  Code version: v1.0.0
+# *  URL:https://stackoverflow.com/questions/7304248/how-should-i-write-tests-for-forms-in-django
+# *  Software License:  Fair Use
+# *
+# *  Title:Testing a simple home page with unit tests
+# *  Author:obeythetestinggoat
+# *  Date: 10/9/20
+# *  Code version: Django v1.11
+# *  URL: https://www.obeythetestinggoat.com/book/chapter_unit_test_first_view.html
+# *  License: Creative Commons CC-BY-NC-ND
+# ***************************************************************************************
+
 from django.test import TestCase
 from django.http import HttpRequest, HttpResponseRedirect
 from django.urls import resolve
