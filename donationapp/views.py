@@ -28,6 +28,33 @@
 # *  URL: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Forms
 # *  Software License: BSD-3
 # *
+# *  Title: Django date query from newest to oldest
+# *  Author: mipadi from stack overflow
+# *  Date: 11/7/2020
+# *  Code version: v1.0.0
+# *  URL:https://stackoverflow.com/questions/30314741/django-date-query-from-newest-to-oldest
+# *  Software License: Fair use
+# *
+# *  Title:  The Ultimate Guide to Django Redirects
+# *  Author:  Daniel Hepper
+# *  Date: 11/23/2020
+# *  Code version: Python 3
+# *  URL:https://realpython.com/django-redirects/
+# *
+# *  Title:Handling Multiple Forms on the Same Page in Django
+# *  Author:Lakshmi Narasimhan
+# *  Date: 11/11/2020
+# *  Code version: v1.0.0
+# *  URL:https://www.codementor.io/@lakshminp/handling-multiple-forms-on-the-same-page-in-django-fv89t2s3j
+# *  Software License: All Rights Reserved
+# *
+# *  Title: django display message after POST form submit
+# *  Authors: damio and Krishna Kumar Jangid from stackoverflow
+# *  Date: 11/23/2020
+# *  Code version: v1.0.0
+# *  URL:https://stackoverflow.com/questions/28723266/django-display-message-after-post-form-submit
+# *  Software License: Fair Use
+# *
 # ***************************************************************************************
 
 from django.shortcuts import render
@@ -42,6 +69,7 @@ from importlib import import_module
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 import datetime
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -62,11 +90,11 @@ def index(request):
                     new_request = False
             if new_request:
                 form2.save()
+                messages.success(request, 'Thank you for volunteering!')
             else:
                 message = "You have already signed up for this opportunity"
+                messages.warning(request, 'Form submission failed!')
     elif 'donate' in request.POST:
-        # form1.instance.user = request.user
-        # form1.instance.date = datetime.datetime.now()
         if form1.is_valid():
             request.session['amount'] = request.POST['amount']
             request.session['cause'] = request.POST['cause']
@@ -142,7 +170,7 @@ def checkout_confirmation(request):
         'cause' : cause})
 
 def volunteer_opportunities(request):
-    latest_volunteer_list = Volunteer_Opp.objects.all()
+    latest_volunteer_list = Volunteer_Opp.objects.order_by('date')
     all_transactions = Volunteer_Transaction.objects.all()
     for cause in latest_volunteer_list:
         total = 0
@@ -157,10 +185,15 @@ def volunteer_opportunities(request):
 @login_required
 def create_opportunity(request):
     form = VolunteerForm(request.POST or None)
+    form.instance.total_people = 0
     if form.is_valid():
         if form.instance.date != None:
             form.clean_date()
         form.save()
+        return HttpResponseRedirect('/donationapp/volunteering')  # 4
+    else:  # 5
+        # Create an empty form instance
+        form = VolunteerForm(request.POST or None)
     context = {'form': form}
 
     return render(request, 'donationapp/create_volunteer', context)

@@ -22,7 +22,6 @@
             </div>
           </div>
         </div>
-        </br>Return to volunteer page? Click <a href="{% url 'donationapp:volunteering' %}">here</a>
       </div>
 
 

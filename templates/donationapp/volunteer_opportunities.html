@@ -1,3 +1,26 @@
+<!-- /***************************************************************************************
+*  Title:How to decrease the size of a jumbotron which is used at footer
+*  Author:Xenio Gracias from stack overflow
+*  Date: 10/11/20
+*  Code version: Version 1
+*  URL:https://stackoverflow.com/questions/55566663/how-to-decrease-the-size-of-the-jumbotron-which-is-used-at-the-footer
+*  Software License: Creative Commons Attribution-ShareAlike
+*
+*  Title: Spacing
+*  Author: Bootstrap
+*  Date:  10/11/20
+*  Code version: Bootstrap version 4
+*  URL:https://getbootstrap.com/docs/4.0/utilities/spacing/
+*  Software License: MIT license
+*
+*  Title: Jumbotron
+*  Author: Bootstrap
+*  Date: 10/11/2020
+*  Code version: Bootstrap 4
+*  URL:https://getbootstrap.com/docs/4.0/components/jumbotron/
+*  Software License:  MIT license
+
+***************************************************************************************/ -->
 {% extends 'donationapp/base.html' %}
 {% load socialaccount %}
 
@@ -23,6 +46,12 @@
 
                         <h3>{{ volunteer.name }}</h3>
                         <h5>{{volunteer.description}}</h5>
+                             {% if volunteer.organization%}
+                            <b> Organization: </b> {{volunteer.organization}}</br>
+                            {% else %}
+                            <b> Organization: </b> No specified organization </br>
+                            {% endif%}
+
                             {% if volunteer.date%}
                             <b> Date/Time: </b> {{volunteer.date}} from {{volunteer.begin}}</br>
                             {% else %}
