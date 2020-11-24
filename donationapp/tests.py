@@ -156,11 +156,11 @@ class VolunteerModelTransactionModelTests(TestCase):
 
 class VolunteerFormTests(TestCase):
     def test_form_check_date(self):
-        form_data = {'date': datetime.date.today(),"name":"test","description":"test","begin":"11:00",'total_people':0,'people_needed':5}
+        form_data = {'date': datetime.date.today(),"organization":"Test","name":"test","description":"test","begin":"11:00",'total_people':0,'people_needed':5}
         form = VolunteerForm(data=form_data)
         self.assertTrue(form.is_valid())
     def test_invalid_form_check_date(self):
-        form_data = {'date': datetime.date(1999,3,3),"name":"test","description":"test","begin":"11:00",'total_people':0,'people_needed':5}
+        form_data = {'date': datetime.date(1999,3,3),"name":"test","organization":"Test","description":"test","begin":"11:00",'total_people':0,'people_needed':5}
         form = VolunteerForm(data=form_data)
         self.assertFalse(form.is_valid())
 
